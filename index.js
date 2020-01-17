@@ -51,12 +51,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         try {
             const { articlePath, encoding, outputPath } = await loadConfig(configFileName);
             const result = await build_1.build(articlePath, encoding);
-            const { articles } = result;
             console.info("Generated");
-            console.log(articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
-            const path = outputPath + "/reblog.json";
+            const path = outputPath + "/aritcle__list.json";
             await mkdirp_1.default(path_1.dirname(path));
-            await util_1.promisify(fs_1.writeFile)(path, JSON.stringify(result));
+            const { articles, ...list } = result;
+            console.log(articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
+            await util_1.promisify(fs_1.writeFile)(path, JSON.stringify(list));
+            await Promise.all(articles.map(async (article) => {
+                const path = `${outputPath}/article_${("0000" + article.metadata.id).slice(-4)}.json`;
+                await util_1.promisify(fs_1.writeFile)(path, JSON.stringify(article));
+            }));
         }
         catch (error) {
             console.error("Error:", error);

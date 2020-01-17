@@ -1,6 +1,6 @@
 {
   "name": "reblog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate blog json for static frontend from markdown",
   "homepage": "https://github.com/kixixixixi/reblog",
   "main": "index.js",
