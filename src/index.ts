@@ -22,9 +22,7 @@ import { Config } from "~/types/config"
     }
   }
 
-  const loadConfig = async (
-    file: string
-  ): Promise<Config> => {
+  const loadConfig = async (file: string): Promise<Config> => {
     if (await isExistsFile(file)) {
       const text = await promisify(readFile)(file, "utf-8")
       const { articlePath, encoding, outputPath } = JSON.parse(text)
@@ -39,16 +37,26 @@ import { Config } from "~/types/config"
   }
 
   try {
-    const { articlePath, encoding, outputPath } = await loadConfig(configFileName)
+    const { articlePath, encoding, outputPath } = await loadConfig(
+      configFileName
+    )
     const result = await build(articlePath, encoding)
-    const { articles } = result
     console.info("Generated")
+    const path = outputPath + "/aritcle__list.json"
+    await mkdirp(dirname(path))
+    const { articles, ...list } = result
     console.log(
       articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n")
     )
-    const path = outputPath + "/reblog.json"
-    await mkdirp(dirname(path))
-    await promisify(writeFile)(path, JSON.stringify(result))
+    await promisify(writeFile)(path, JSON.stringify(list))
+    await Promise.all(
+      articles.map(async article => {
+        const path = `${outputPath}/article_${(
+          "0000" + article.metadata.id
+        ).slice(-4)}.json`
+        await promisify(writeFile)(path, JSON.stringify(article))
+      })
+    )
   } catch (error) {
     console.error("Error:", error)
   }
