@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import fs from "fs"
 import mkdirp from "mkdirp"
 import { promisify } from "util"

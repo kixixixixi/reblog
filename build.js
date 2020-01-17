@@ -33,7 +33,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             const text = await util_1.promisify(fs_1.default.readFile)(articlePath + "/" + file.name, encoding);
             const { metadata, content } = parse_md_1.default(text);
             const { author, publish, tags, description, title } = metadata;
-            const _tags = tags && tags.split(',');
             const article = {
                 id: articleId,
                 name: articleName,
@@ -41,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 title: title,
                 description: description,
                 author: author,
-                tags: _tags
+                tags: [tags].flat()
             };
             if (publish) {
                 const year = dayjs_1.default(publish).year();
@@ -56,7 +55,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 const authorArticle = authorArticles[author] || [];
                 authorArticles[author] = [...authorArticle, article];
             }
-            _tags.forEach((tag) => {
+            [tags].flat().forEach((tag) => {
                 const tagArticle = tagArticles[tag] || [];
                 tagArticles[tag] = [...tagArticle, article];
             });

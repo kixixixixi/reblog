@@ -8,6 +8,9 @@
     "exec": "ts-node --files -r tsconfig-paths/register src/index.ts",
     "build": "tsc"
   },
+  "bin": {
+    "reblog": "index.js"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
