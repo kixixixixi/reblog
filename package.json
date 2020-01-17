@@ -1,0 +1,24 @@
+{
+  "name": "reblog",
+  "version": "0.0.1",
+  "description": "Generate blog json for static frontend from markdown",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "exec": "ts-node --files -r tsconfig-paths/register src/index.ts",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.1.7",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "dayjs": "^1.8.19",
+    "mkdirp": "^0.5.1",
+    "parse-md": "^2.0.4"
+  }
+}

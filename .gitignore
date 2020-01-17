@@ -1,0 +1,13 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# generated
+/dist/*
+!/dist/.keep
+
+# articles
+/articles/*
+!/articles/_article.md.template
