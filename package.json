@@ -15,8 +15,11 @@
   "bin": {
     "reblog": "index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "pre-commit": [
+    "test"
+  ],
+  "author": "kixixixixi",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.9.0",
     "@types/node": "^13.1.7",
@@ -35,6 +38,7 @@
   "dependencies": {
     "dayjs": "^1.8.19",
     "mkdirp": "^0.5.1",
-    "parse-md": "^2.0.4"
+    "parse-md": "^2.0.4",
+    "pre-commit": "^1.2.2"
   }
 }
