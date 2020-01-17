@@ -13,3 +13,10 @@ export interface Article {
   content: string
 }
 
+export interface ArticleGenerated {
+  articleIds: number[]
+  publishArticles: { [key: number]: { [key: number]: ArticleMetadata[] } }
+  authorArticles: { [key: string]: ArticleMetadata[] }
+  tagArticles: { [key: string]: ArticleMetadata[] }
+  articles: Article[]
+}

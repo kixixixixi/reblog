@@ -17,7 +17,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const parse_md_1 = __importDefault(require("parse-md"));
     const dayjs_1 = __importDefault(require("dayjs"));
     const build = async (articlePath, encoding) => {
-        const files = await util_1.promisify(fs_1.default.readdir)(articlePath, { withFileTypes: true });
+        const files = await util_1.promisify(fs_1.default.readdir)(articlePath, {
+            withFileTypes: true
+        });
         const markdownFiles = files.filter(f => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name));
         console.log("File count is", markdownFiles.length);
         let articleIds = [];
@@ -49,12 +51,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     publishArticles[year] = {};
                 if (!publishArticles[year][month])
                     publishArticles[year][month] = [];
-                publishArticles[year][month] = [...publishArticles[year][month], article];
+                publishArticles[year][month] = [
+                    ...publishArticles[year][month],
+                    article
+                ];
             }
             if (author) {
                 const authorArticle = authorArticles[author] || [];
                 authorArticles[author] = [...authorArticle, article];
             }
+            ;
             [tags].flat().forEach((tag) => {
                 const tagArticle = tagArticles[tag] || [];
                 tagArticles[tag] = [...tagArticle, article];
@@ -65,7 +71,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 content: content
             };
         }));
-        if ((new Set(articleIds)).size != articleIds.length)
+        if (new Set(articleIds).size != articleIds.length)
             throw "Duplicated article Id";
         return {
             articleIds: [...articleIds].sort(),

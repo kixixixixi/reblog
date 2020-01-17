@@ -1,2 +1,8 @@
 /src
 tsconfig.json
+.eslintrc.json
+/node_modules
+npm-debug.log
+/dist/*
+/articles/*
+!/articles/_article.md.template

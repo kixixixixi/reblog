@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         const { articles } = result;
         console.info("Generated");
         console.log(articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
-        const path = outputPath + '/reblog.json';
+        const path = outputPath + "/reblog.json";
         await mkdirp_1.default(path_1.dirname(path));
         await util_1.promisify(fs_1.default.writeFile)(path, JSON.stringify(result));
     })
