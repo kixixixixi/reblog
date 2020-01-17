@@ -2,6 +2,7 @@
   "name": "reblog",
   "version": "0.0.1",
   "description": "Generate blog json for static frontend from markdown",
+  "homepage": "https://github.com/kixixixixi/reblog",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -40,5 +41,14 @@
     "mkdirp": "^0.5.1",
     "parse-md": "^2.0.4",
     "pre-commit": "^1.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kixixixixi/reblog.git"
+  },
+  "keywords": [
+    "blog",
+    "json",
+    "spa"
+  ]
 }
