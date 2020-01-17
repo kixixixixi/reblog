@@ -6,3 +6,6 @@ npm-debug.log
 /dist/*
 /articles/*
 !/articles/_article.md.template
+/__test_articles
+/__tests__
+jest.config.js

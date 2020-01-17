@@ -6,7 +6,7 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "types" : ["node"],
+    "types" : ["node", "@types/jest"],
     "baseUrl": "./",
     "typeRoots": ["src/types"],
     "outDir": "./",
