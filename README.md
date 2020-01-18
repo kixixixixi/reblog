@@ -14,13 +14,15 @@ $ npm i -g reblog
 ## Init
 Create `articles` directory and config file.
 ```
-$ npx reblog init 
+$ reblog init 
 ```
 
-## Deploy blog aritcle (`*.md`)
-Deploy your blog articles to `./articles` directory.
+## Create aritcle
+```
+$ reblog new <title>
+```
 
 ## Generate json
 ```
-$ npx reblog build
+$ reblog build
 ```

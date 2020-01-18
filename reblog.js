@@ -18,6 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         commander_1.default
             .version("0.0.3")
             .command("init", "create config file")
+            .command("new <title>", "create article")
             .command("build", "generate json");
         await commander_1.default.parseAsync(process.argv);
     })();

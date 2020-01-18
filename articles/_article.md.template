@@ -1,8 +1,8 @@
 ---
-publish: 2020-01-01
-title: Title
-author: author_name
-description: Article_description
+publish: {{publish}}
+title: {{title}}
+author: {{author}}
+description: Article description
 tags:
  - tag1
  - tag2
