@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,7 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "fs", "mkdirp", "util", "path", "./build"], factory);
+        define(["require", "exports", "fs", "mkdirp", "util", "path", "./build", "./config"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -18,38 +17,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const util_1 = require("util");
     const path_1 = require("path");
     const build_1 = require("./build");
+    const config_1 = require("./config");
     (async () => {
-        const configFileName = "reblog.config.json";
-        const defaultConfig = {
-            articlePath: "./articles",
-            encoding: "utf-8",
-            outputPath: "./dist"
-        };
-        const isExistsFile = async (file) => {
-            try {
-                await util_1.promisify(fs_1.stat)(file);
-                return true;
-            }
-            catch {
-                return false;
-            }
-        };
-        const loadConfig = async (file) => {
-            if (await isExistsFile(file)) {
-                const text = await util_1.promisify(fs_1.readFile)(file, "utf-8");
-                const { articlePath, encoding, outputPath } = JSON.parse(text);
-                return {
-                    articlePath: articlePath || defaultConfig.articlePath,
-                    encoding: encoding || defaultConfig.encoding,
-                    outputPath: outputPath || defaultConfig.outputPath
-                };
-            }
-            else {
-                return defaultConfig;
-            }
-        };
         try {
-            const { articlePath, encoding, outputPath } = await loadConfig(configFileName);
+            const { articlePath, encoding, outputPath } = await config_1.loadConfig(config_1.configFileName);
             const result = await build_1.build(articlePath, encoding);
             console.info("Generated");
             const path = outputPath + "/aritcle__list.json";

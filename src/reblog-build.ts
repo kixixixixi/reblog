@@ -1,41 +1,10 @@
-#! /usr/bin/env node
-
-import { writeFile, readFile, stat } from "fs"
+import { writeFile } from "fs"
 import mkdirp from "mkdirp"
 import { promisify } from "util"
 import { dirname } from "path"
 import { build } from "./build"
-import { Config } from "~/types/config"
+import { configFileName, loadConfig } from "./config"
 ;(async (): Promise<void> => {
-  const configFileName = "reblog.config.json"
-  const defaultConfig: Config = {
-    articlePath: "./articles",
-    encoding: "utf-8",
-    outputPath: "./dist"
-  }
-  const isExistsFile = async (file: string): Promise<boolean> => {
-    try {
-      await promisify(stat)(file)
-      return true
-    } catch {
-      return false
-    }
-  }
-
-  const loadConfig = async (file: string): Promise<Config> => {
-    if (await isExistsFile(file)) {
-      const text = await promisify(readFile)(file, "utf-8")
-      const { articlePath, encoding, outputPath } = JSON.parse(text)
-      return {
-        articlePath: articlePath || defaultConfig.articlePath,
-        encoding: encoding || defaultConfig.encoding,
-        outputPath: outputPath || defaultConfig.outputPath
-      }
-    } else {
-      return defaultConfig
-    }
-  }
-
   try {
     const { articlePath, encoding, outputPath } = await loadConfig(
       configFileName
