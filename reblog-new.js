@@ -7,7 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "fs", "mkdirp", "util", "path", "dayjs", "./config", "./file"], factory);
+        define(["require", "exports", "fs", "mkdirp", "util", "dayjs", "./config", "./file"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -15,14 +15,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const fs_1 = require("fs");
     const mkdirp_1 = __importDefault(require("mkdirp"));
     const util_1 = require("util");
-    const path_1 = require("path");
     const dayjs_1 = __importDefault(require("dayjs"));
     const config_1 = require("./config");
     const file_1 = require("./file");
     (async () => {
         const { articlePath } = await config_1.loadConfig(config_1.configFileName);
         if (!file_1.isExistsDirectory(articlePath)) {
-            await mkdirp_1.default(path_1.dirname(articlePath));
+            await mkdirp_1.default(articlePath);
             console.log("Created", articlePath);
         }
         const files = await util_1.promisify(fs_1.readdir)(articlePath, {

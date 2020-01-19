@@ -23,11 +23,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             const { articlePath, encoding, outputPath } = await config_1.loadConfig(config_1.configFileName);
             const result = await build_1.build(articlePath, encoding);
             console.info("Generated");
-            const path = outputPath + "/aritcle__list.json";
-            await mkdirp_1.default(path_1.dirname(path));
+            const path = outputPath + "/article__list.json";
+            await util_1.promisify(mkdirp_1.default)(path_1.dirname(path));
             const { articles, ...list } = result;
             console.log(articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
-            await util_1.promisify(fs_1.writeFile)(path, JSON.stringify(list));
+            const metadatas = articles.map(a => a.metadata);
+            await util_1.promisify(fs_1.writeFile)(path, JSON.stringify({ ...list, articles: metadatas }));
             await Promise.all(articles.map(async (article) => {
                 const path = `${outputPath}/article_${("0000" + article.metadata.id).slice(-4)}.json`;
                 await util_1.promisify(fs_1.writeFile)(path, JSON.stringify(article));

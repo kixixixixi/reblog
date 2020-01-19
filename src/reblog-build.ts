@@ -11,13 +11,17 @@ import { configFileName, loadConfig } from "./config"
     )
     const result = await build(articlePath, encoding)
     console.info("Generated")
-    const path = outputPath + "/aritcle__list.json"
-    await mkdirp(dirname(path))
+    const path = outputPath + "/article__list.json"
+    await promisify(mkdirp)(dirname(path))
     const { articles, ...list } = result
     console.log(
       articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n")
     )
-    await promisify(writeFile)(path, JSON.stringify(list))
+    const metadatas = articles.map(a => a.metadata)
+    await promisify(writeFile)(
+      path,
+      JSON.stringify({ ...list, articles: metadatas })
+    )
     await Promise.all(
       articles.map(async article => {
         const path = `${outputPath}/article_${(

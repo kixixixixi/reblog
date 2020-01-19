@@ -1,14 +1,13 @@
 import { readdir, writeFile } from "fs"
 import mkdirp from "mkdirp"
 import { promisify } from "util"
-import { dirname } from "path"
 import dayjs from "dayjs"
 import { configFileName, loadConfig } from "./config"
 import { isExistsDirectory } from "./file"
 ;(async (): Promise<void> => {
   const { articlePath } = await loadConfig(configFileName)
   if (!isExistsDirectory(articlePath)) {
-    await mkdirp(dirname(articlePath))
+    await mkdirp(articlePath)
     console.log("Created", articlePath)
   }
   const files = await promisify(readdir)(articlePath, {
