@@ -20,7 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const config_1 = require("./config");
     const file_1 = require("./file");
     (async () => {
-        const { articlePath, encoding } = await config_1.loadConfig(config_1.configFileName);
+        const { articlePath } = await config_1.loadConfig(config_1.configFileName);
         if (!file_1.isExistsDirectory(articlePath)) {
             await mkdirp_1.default(path_1.dirname(articlePath));
             console.log("Created", articlePath);
@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         const nospaceTitle = title.replace(/ /g, "_");
         const path = `${articlePath}/${("0000" + articleId).slice(-4)}_${nospaceTitle}.md`;
         const content = `---
-publish: ${dayjs_1.default().format('YYYY-MM-DD')}
+publish: ${dayjs_1.default().format("YYYY-MM-DD")}
 title: ${title}
 author:
 description:

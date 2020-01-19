@@ -8,7 +8,10 @@ import { isExistsFile, isExistsDirectory } from "./file"
   if (!isExistsFile(configFileName)) {
     console.log("Config file exists")
   } else {
-    await promisify(writeFile)(configFileName, JSON.stringify(defaultConfig))
+    await promisify(writeFile)(
+      configFileName,
+      JSON.stringify(defaultConfig, null, 2)
+    )
     console.log("Created", configFileName)
   }
   if (isExistsDirectory(defaultConfig.articlePath)) {

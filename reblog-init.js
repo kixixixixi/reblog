@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             console.log("Config file exists");
         }
         else {
-            await util_1.promisify(fs_1.writeFile)(config_1.configFileName, JSON.stringify(config_1.defaultConfig));
+            await util_1.promisify(fs_1.writeFile)(config_1.configFileName, JSON.stringify(config_1.defaultConfig, null, 2));
             console.log("Created", config_1.configFileName);
         }
         if (file_1.isExistsDirectory(config_1.defaultConfig.articlePath)) {
