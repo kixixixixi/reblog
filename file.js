@@ -9,6 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isExistsDirectory = exports.isExistsFile = void 0;
     const fs_1 = require("fs");
     const util_1 = require("util");
     const isExistsFile = async (file) => {

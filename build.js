@@ -12,15 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.build = void 0;
     const fs_1 = __importDefault(require("fs"));
     const util_1 = require("util");
     const parse_md_1 = __importDefault(require("parse-md"));
     const dayjs_1 = __importDefault(require("dayjs"));
     const build = async (articlePath, encoding) => {
         const files = await util_1.promisify(fs_1.default.readdir)(articlePath, {
-            withFileTypes: true
+            withFileTypes: true,
         });
-        const markdownFiles = files.filter(f => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name));
+        const markdownFiles = files.filter((f) => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name));
         console.log("File count is", markdownFiles.length);
         let articleIds = [];
         const publishArticles = {};
@@ -42,7 +43,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 title: title,
                 description: description,
                 author: author,
-                tags: [tags].flat()
+                tags: [tags].flat(),
             };
             if (publish) {
                 const year = dayjs_1.default(publish).year();
@@ -53,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     publishArticles[year][month] = [];
                 publishArticles[year][month] = [
                     ...publishArticles[year][month],
-                    article
+                    article,
                 ];
             }
             if (author) {
@@ -68,7 +69,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             articleIds = [...articleIds, articleId];
             return {
                 metadata: article,
-                content: content
+                content: content,
             };
         }));
         if (new Set(articleIds).size != articleIds.length)
@@ -78,7 +79,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             publishArticles,
             authorArticles,
             tagArticles,
-            articles
+            articles,
         };
     };
     exports.build = build;

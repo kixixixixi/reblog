@@ -6,7 +6,7 @@ import { isExistsFile } from "./file"
 const defaultConfig: Config = {
   articlePath: "./articles",
   encoding: "utf-8",
-  outputPath: "./dist"
+  outputPath: "./dist",
 }
 const configFileName = "reblog.config.json"
 
@@ -17,7 +17,7 @@ const loadConfig = async (file: string): Promise<Config> => {
     return {
       articlePath: articlePath || defaultConfig.articlePath,
       encoding: encoding || defaultConfig.encoding,
-      outputPath: outputPath || defaultConfig.outputPath
+      outputPath: outputPath || defaultConfig.outputPath,
     }
   } else {
     return defaultConfig

@@ -9,10 +9,10 @@ const build = async (
   encoding: string
 ): Promise<ArticleGenerated> => {
   const files = await promisify(fs.readdir)(articlePath, {
-    withFileTypes: true
+    withFileTypes: true,
   })
   const markdownFiles = files.filter(
-    f => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name)
+    (f) => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name)
   )
   console.log("File count is", markdownFiles.length)
   let articleIds: number[] = []
@@ -22,7 +22,7 @@ const build = async (
   const authorArticles: { [key: string]: ArticleMetadata[] } = {}
   const tagArticles: { [key: string]: ArticleMetadata[] } = {}
   const articles = await Promise.all(
-    markdownFiles.map(async file => {
+    markdownFiles.map(async (file) => {
       const [fileName, ..._] = file.name.split(".")
       console.log("Loading...", fileName)
       const [articleIdStr, ...names] = fileName.split("_")
@@ -42,7 +42,7 @@ const build = async (
         title: title,
         description: description,
         author: author,
-        tags: [tags].flat()
+        tags: [tags].flat(),
       }
 
       if (publish) {
@@ -52,7 +52,7 @@ const build = async (
         if (!publishArticles[year][month]) publishArticles[year][month] = []
         publishArticles[year][month] = [
           ...publishArticles[year][month],
-          article
+          article,
         ]
       }
       if (author) {
@@ -67,7 +67,7 @@ const build = async (
       articleIds = [...articleIds, articleId]
       return {
         metadata: article,
-        content: content
+        content: content,
       }
     })
   )
@@ -80,7 +80,7 @@ const build = async (
     publishArticles,
     authorArticles,
     tagArticles,
-    articles
+    articles,
   }
 }
 

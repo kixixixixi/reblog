@@ -15,15 +15,15 @@ import { configFileName, loadConfig } from "./config"
     await promisify(mkdirp)(dirname(path))
     const { articles, ...list } = result
     console.log(
-      articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n")
+      articles.map((a) => `${a.metadata.id} - ${a.metadata.title}`).join("\n")
     )
-    const metadatas = articles.map(a => a.metadata)
+    const metadatas = articles.map((a) => a.metadata)
     await promisify(writeFile)(
       path,
       JSON.stringify({ ...list, articles: metadatas })
     )
     await Promise.all(
-      articles.map(async article => {
+      articles.map(async (article) => {
         const path = `${outputPath}/article_${(
           "0000" + article.metadata.id
         ).slice(-4)}.json`

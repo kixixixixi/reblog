@@ -9,13 +9,14 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.loadConfig = exports.configFileName = exports.defaultConfig = void 0;
     const fs_1 = require("fs");
     const util_1 = require("util");
     const file_1 = require("./file");
     const defaultConfig = {
         articlePath: "./articles",
         encoding: "utf-8",
-        outputPath: "./dist"
+        outputPath: "./dist",
     };
     exports.defaultConfig = defaultConfig;
     const configFileName = "reblog.config.json";
@@ -27,7 +28,7 @@
             return {
                 articlePath: articlePath || defaultConfig.articlePath,
                 encoding: encoding || defaultConfig.encoding,
-                outputPath: outputPath || defaultConfig.outputPath
+                outputPath: outputPath || defaultConfig.outputPath,
             };
         }
         else {

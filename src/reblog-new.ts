@@ -11,10 +11,10 @@ import { isExistsDirectory } from "./file"
     console.log("Created", articlePath)
   }
   const files = await promisify(readdir)(articlePath, {
-    withFileTypes: true
+    withFileTypes: true,
   })
   const markdownFiles = files.filter(
-    f => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name)
+    (f) => !f.isDirectory() && /.*\.(md|MD)$/.test(f.name)
   )
   let articleId = 1
   if (markdownFiles.length > 0) {
@@ -22,7 +22,7 @@ import { isExistsDirectory } from "./file"
     const articleIdStr = lastFileName.split("_")[0]
     articleId = parseInt(articleIdStr) + 1
   }
-  const index = process.argv.findIndex(a => /reblog-new\.js$/.test(a))
+  const index = process.argv.findIndex((a) => /reblog-new\.js$/.test(a))
   const title = process.argv.slice(index + 1).join(" ")
   const nospaceTitle = title.replace(/ /g, "_")
   const path = `${articlePath}/${("0000" + articleId).slice(

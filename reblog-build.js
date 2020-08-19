@@ -26,8 +26,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             const path = outputPath + "/article__list.json";
             await util_1.promisify(mkdirp_1.default)(path_1.dirname(path));
             const { articles, ...list } = result;
-            console.log(articles.map(a => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
-            const metadatas = articles.map(a => a.metadata);
+            console.log(articles.map((a) => `${a.metadata.id} - ${a.metadata.title}`).join("\n"));
+            const metadatas = articles.map((a) => a.metadata);
             await util_1.promisify(fs_1.writeFile)(path, JSON.stringify({ ...list, articles: metadatas }));
             await Promise.all(articles.map(async (article) => {
                 const path = `${outputPath}/article_${("0000" + article.metadata.id).slice(-4)}.json`;
