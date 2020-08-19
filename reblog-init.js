@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             console.log("Created", config_1.configFileName);
         }
         if (await file_1.isExistsDirectory(config_1.defaultConfig.articlePath)) {
-            console.log("Aritcles directory exists");
+            console.log("Articles directory exists");
         }
         else {
             await util_1.promisify(mkdirp_1.default)(config_1.defaultConfig.articlePath);

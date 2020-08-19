@@ -14,7 +14,7 @@ import { isExistsFile, isExistsDirectory } from "./file"
     console.log("Created", configFileName)
   }
   if (await isExistsDirectory(defaultConfig.articlePath)) {
-    console.log("Aritcles directory exists")
+    console.log("Articles directory exists")
   } else {
     await promisify(mkdirp)(defaultConfig.articlePath)
     console.log("Created", defaultConfig.articlePath)
